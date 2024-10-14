@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <!-- As a heading -->
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">full-stack todo app</span>
+            <a href="/profile">
+                <span class="navbar-brand mb-0 h1">profile</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 class="text-center text-primary">Create Todo</h1>
+        <form action="/" method="post" class="mb-4">
+            <div class="form-group">
+                <label for="todoName">Todo Name</label>
+                <input type="text" name="todoName" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="desc">Todo Description</label>
+                <input type="text" name="desc" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Todo</button>
+        </form>
+
+        <h2 class="text-secondary">Todo List</h2>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Todo Name</th>
+                    <th>Description</th>
+                    <th>Created at</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% todos.forEach(todo=> { %>
+                    <tr>
+                        <td>
+                            <%= todo.todoName %>
+                        </td>
+                        <td>
+                            <%= todo.desc %>
+                        </td>
+                        <td>
+                            <%= new Date(todo.createdAt).toLocaleString() %>
+                        </td> <!-- Format the date nicely -->
+                        <td>
+                            <form action="/edit/<%= todo._id %>" method="get" style="display:inline;">
+                                <button type="submit" class="btn btn-warning btn-sm">Edit</button>
+                            </form>
+                            <form action="/delete/<%= todo._id %>" method="post" style="display:inline;">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+
+        </table>
+    </div>
+
+    <!-- Bootstrap JS and dependencies (optional for dropdowns, modals, etc.) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <!-- As a heading -->
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">full-stack todo app</span>
+        </div>
+    </nav>
+
+    <div class="container text-center mt-5">
+        <h1 class="display-4">Welcome, <%= user.username %>!</h1>
+
+        <!-- Profile Picture Section -->
+        <div class="my-4">
+            <img src="<%= user.imagePath ? user.imagePath : '/uploads/BlankPFP.jpg' %>" alt="Profile Picture"
+                class="img-thumbnail">
+            <form action="/profile" method="POST" enctype="multipart/form-data">
+                <input type="file" name="file">
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+
+        <div class="mt-4">
+            <a href="/logout" class="btn btn-danger">Logout</a>
+            <a href="/" class="btn btn-primary">Back to Home Page</a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies (optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>
