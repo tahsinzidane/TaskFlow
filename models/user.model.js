@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    imagePath: { type: String, default: '/uploads/default.png' }
+    imagePath: { type: String, default: '/uploads/BlankPFP.jpg' }
 }, { timestamps: true });
 
 const User = mongoose.model('User', userSchema);

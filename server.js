@@ -103,19 +103,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.use('/uploads', express.static('uploads'));
 
-const title = 'full-stack todo app';
+const title = 'task flow';
 
 
 // Routes
 app.get('/', ensureAuthenticated, async (req, res) => {
-    const todos = await Todo.find(); 
+    const todos = await Todo.find();
     res.render('index', { todos, title });
 });
 
 app.post('/', async (req, res) => {
     const { todoName, desc } = req.body;
     const newTodo = new Todo({ todoName, desc });
-    await newTodo.save(); 
+    await newTodo.save();
     res.redirect('/');
 });
 
@@ -149,7 +149,7 @@ app.post('/delete/:id', async (req, res) => {
 
 // Register route
 app.get('/register', (req, res) => {
-    res.render('register', {title});
+    res.render('register', { title });
 });
 
 app.post('/register', async (req, res) => {
@@ -211,7 +211,7 @@ app.post('/register', async (req, res) => {
 
 // Login route
 app.get('/login', (req, res) => {
-    res.render('login', {title});
+    res.render('login', { title });
 });
 
 app.post('/login', (req, res, next) => {
@@ -231,7 +231,7 @@ app.get('/profile', ensureAuthenticated, (req, res) => {
     }
 
     res.render('profile', {
-        user: req.user, 
+        user: req.user,
         title
     });
 });
@@ -247,7 +247,7 @@ app.post('/profile', upload.single('file'), async (req, res) => {
             return res.status(400).send('No file uploaded.');
         }
 
-        const imagePath = `/uploads/${req.file.filename}`; 
+        const imagePath = `/uploads/${req.file.filename}`;
 
         // Update the user's imagePath in the database
         await User.findByIdAndUpdate(req.user._id, { imagePath: imagePath });
